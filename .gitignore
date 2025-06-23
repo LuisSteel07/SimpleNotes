@@ -1,0 +1,8 @@
+# Virtualenv
+.venv
+
+# DataBase
+data.sqlite
+
+# IDE
+.idea
