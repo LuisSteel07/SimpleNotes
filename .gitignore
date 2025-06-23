@@ -4,5 +4,9 @@
 # DataBase
 data.sqlite
 
+# pycache
+Components/__pycache__
+__pycache__
+
 # IDE
 .idea
