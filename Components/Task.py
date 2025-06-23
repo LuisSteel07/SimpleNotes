@@ -4,7 +4,7 @@ from controler import get_id, update_note
 
 
 class Task(ft.Container):
-    def __init__(self, task_name: str, text: str, task_status_change, task_delete):
+    def __init__(self, task_name: str, text: str, color: str, task_status_change, task_delete):
         super().__init__()
         self.border_radius = 20
         self.padding = 20
@@ -12,7 +12,7 @@ class Task(ft.Container):
         self.completed = False
         self.task_name = task_name
         self.text = text
-        self.bgcolor = ft.colors.PURPLE_900
+        self.bgcolor = color
 
         self.task_status_change = task_status_change
         self.task_delete = task_delete

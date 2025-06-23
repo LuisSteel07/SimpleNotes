@@ -19,10 +19,10 @@ def create_table():
                         PRIMARY KEY("id" AUTOINCREMENT)
                 );""")
 
-def add_note(task_name: str, text: str):
+def add_note(task_name: str, text: str, color_code: str):
     conn = sqlite3.connect("data.sqlite")
     cur = conn.cursor()
-    cur.execute("INSERT INTO Note (title, text, completed) VALUES (?, ?, ?)", (task_name, text, "False"))
+    cur.execute("INSERT INTO Note (title, text, completed, color) VALUES (?, ?, ?, ?)", (task_name, text, "False", color_code))
     conn.commit()
 
 def update_note(task_id: int, new_task_name: str, completed: bool):
