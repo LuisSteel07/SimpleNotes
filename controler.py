@@ -25,13 +25,13 @@ def add_note(task_name: str, text: str, color_code: str):
     cur.execute("INSERT INTO Note (title, text, completed, color) VALUES (?, ?, ?, ?)", (task_name, text, "False", color_code))
     conn.commit()
 
-def update_note(task_id: int, new_task_name: str, completed: bool):
+def update_note(task_id: int, new_task_name: str, new_text: str, completed: bool):
     completed_str = "False"
     if completed: completed_str = "True"
 
     conn = sqlite3.connect("data.sqlite")
     cur = conn.cursor()
-    cur.execute("UPDATE Note SET title = ?, completed = ? WHERE id = ?", (new_task_name, completed_str,task_id))
+    cur.execute("UPDATE Note SET title = ?, text = ?, completed = ? WHERE id = ?", (new_task_name, new_text, completed_str,task_id))
     conn.commit()
 
 def delete_note(task_id: int):

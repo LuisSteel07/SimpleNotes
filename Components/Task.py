@@ -19,7 +19,10 @@ class Task(ft.Container):
         self.display_task = ft.Checkbox(
             value=False, label=self.task_name, on_change=self.status_changed
         )
+        self.display_text = ft.Text(value=self.text)
+
         self.edit_name = ft.TextField(expand=1)
+        self.edit_text = ft.TextField(expand=1)
 
         self.display_view = ft.Row(
             alignment=ft.MainAxisAlignment.SPACE_BETWEEN,
@@ -27,7 +30,7 @@ class Task(ft.Container):
             controls=[
                 ft.Column([
                     self.display_task,
-                    ft.Text(value=self.text),
+                    self.display_text
                 ]),
                 ft.Row(
                     spacing=10,
@@ -57,6 +60,7 @@ class Task(ft.Container):
             vertical_alignment=ft.CrossAxisAlignment.CENTER,
             controls=[
                 self.edit_name,
+                self.edit_text,
                 ft.IconButton(
                     icon=ft.Icons.DONE_OUTLINE_OUTLINED,
                     icon_color=ft.Colors.GREEN,
@@ -72,20 +76,22 @@ class Task(ft.Container):
 
     def edit_clicked(self, e):
         self.edit_name.value = self.display_task.label
+        self.edit_text.value = self.text
         self.display_view.visible = False
         self.edit_view.visible = True
         self.update()
 
     def save_clicked(self, e):
         self.display_task.label = self.edit_name.value
-        update_note(self.id, self.edit_name.value, self.completed)
+        self.display_text.value = self.edit_text.value
+        update_note(self.id, self.edit_name.value, self.edit_text.value, self.completed)
         self.display_view.visible = True
         self.edit_view.visible = False
         self.update()
 
     def status_changed(self, e):
         self.completed = self.display_task.value
-        update_note(self.id, self.task_name, self.completed)
+        update_note(self.id, self.task_name, self.text, self.completed)
         self.task_status_change()
 
     def delete_clicked(self, e):
